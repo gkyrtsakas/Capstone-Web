@@ -30,6 +30,6 @@
     </script>
   </head>
   <body>
-    <div id="chart_div"></div>
+    <div id="chart_div" style="position:absolute;right:0px;top:0px;"></div>
   </body>
 </html>

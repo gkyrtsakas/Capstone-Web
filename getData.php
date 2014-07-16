@@ -7,7 +7,7 @@ if (mysqli_connect_errno())
 }
 
 $result = mysqli_query($con, "SELECT * FROM (
-	SELECT * FROM data1 ORDER BY date DESC LIMIT 7
+	SELECT * FROM data1 where MONTH(date) = (MONTH(NOW())) ORDER BY date DESC LIMIT 7
 ) sub
 ORDER BY date ASC;");
 if (!$result) { // add this check.
@@ -17,10 +17,11 @@ if (!$result) { // add this check.
 $table = array();
 $table['cols'] = array (
 array('id' => '', 'label' => 'Date', 'pattern' => "", 'type' => 'string'),
-array('id' => '', 'label' => 'Current', 'pattern' => "", 'type' => 'number'),
-array('id' => '', 'label' => 'Voltage 1', 'pattern' => "", 'type' => 'number'),
-array('id' => '', 'label' => 'Voltage 2', 'pattern' => "", 'type' => 'number'),
-array('id' => '', 'label' => 'Voltage 3', 'pattern' => "", 'type' => 'number')
+array('id' => '', 'label' => 'System Current', 'pattern' => "", 'type' => 'number'),
+array('id' => '', 'label' => 'System Voltage', 'pattern' => "", 'type' => 'number'),
+array('id' => '', 'label' => 'System Power', 'pattern' => "", 'type' => 'number'),
+array('id' => '', 'label' => 'Panel 1 Voltage', 'pattern' => "", 'type' => 'number'),
+array('id' => '', 'label' => 'Panel 2 Voltage', 'pattern' => "", 'type' => 'number')
 );
 
 $rows = array();
@@ -31,6 +32,7 @@ while ($row = $result->fetch_assoc())
 	$temp[] = array('v' => (string)$row['date'], 'f' => NULL);
 	$temp[] = array('v' => (double)$row['current'], 'f' => NULL);
 	$temp[] = array('v' => (double)$row['voltage'], 'f' => NULL);
+	$temp[] = array('v' => (double)$row['current'] * (double)$row['voltage'], 'f' => NULL);
 	$temp[] = array('v' => (double)$row['voltage2'], 'f' => NULL);
 	$temp[] = array('v' => (double)$row['voltage3'], 'f' => NULL);
 	$rows[] = array('c' => $temp);

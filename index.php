@@ -48,9 +48,18 @@
         <h1>Archive</h1>
         <p class="lead">Last Month's Performance</p>
       </div>
+      <div class="col-md-3 col-md-offset-0">
+        <div class="btn-group">
+          <button type="button" class="btn btn-default">Left</button>
+          <button type="button" class="btn btn-default">Middle</button>
+          <button type="button" class="btn btn-default">Right</button>
+        </div>
+       </div>  
     </div>
 
-    <div>
+    
+
+    <div style="position:relative;width=100%">
       <?php 
         include("chart.php");
         
