@@ -4,7 +4,8 @@
 
 boolean trigger;
 
-char ssid[] = "SolarCapstone";
+char ssid[] = "wicip";
+char pass[] = "wicipwifi";
 
 int del;
 int status = WL_IDLE_STATUS;
@@ -34,7 +35,7 @@ void setup(){
   TIMSK1 |= (1 << OCIE1A); // enable timer compare interrupt:
   sei();
   
-  status = WiFi.begin(ssid);
+  status = WiFi.begin(ssid,pass);
   if (status != WL_CONNECTED) {
     Serial.println("Attempting to connect to wifi...");
     while(true);

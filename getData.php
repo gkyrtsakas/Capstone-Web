@@ -7,7 +7,7 @@ if (mysqli_connect_errno())
 }
 
 $result = mysqli_query($con, "SELECT * FROM (
-	SELECT * FROM data1 where MONTH(date) = (MONTH(NOW())) ORDER BY date DESC LIMIT 7
+	SELECT * FROM data1 where MONTH(date) = (MONTH(NOW())) ORDER BY date DESC
 ) sub
 ORDER BY date ASC;");
 if (!$result) { // add this check.

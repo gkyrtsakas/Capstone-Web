@@ -33,32 +33,19 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.php">Home</a></li>
+            <li><a href="index.php">Home</a></li>
             <li><a href="daily.php">Daily Energy</a></li>
-            <li><a href="about.php">About</a></li>
+            <li class="active"><a href="about.php">About</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </div>
 
+    Hi.
 
-    <!--Div that will hold the line chart-->
-    <div class="container">
-      <div class="starter-template">
-        <h1>Archive</h1>
-        <p class="lead">Most Recent Performance</p>
-      </div> 
-    </div>
 
-    
-
-    <div style="position:relative;width=100%">
-      <?php 
-        include("chart.php");
-        
-       ?>
-    </div>
+  
 
 
 
