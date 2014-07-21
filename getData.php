@@ -6,10 +6,7 @@ if (mysqli_connect_errno())
 	echo "Failed to connect to database: ".mysqli_connect_errno();
 }
 
-$result = mysqli_query($con, "SELECT * FROM (
-	SELECT * FROM data1 where MONTH(date) = (MONTH(NOW())) ORDER BY date DESC
-) sub
-ORDER BY date ASC;");
+$result = mysqli_query($con, "SELECT * FROM data1 WHERE date >= now() - INTERVAL 1 DAY;");
 if (!$result) { // add this check.
     die('Invalid query: ' . mysql_error());
 }
@@ -17,11 +14,11 @@ if (!$result) { // add this check.
 $table = array();
 $table['cols'] = array (
 array('id' => '', 'label' => 'Date', 'pattern' => "", 'type' => 'string'),
-array('id' => '', 'label' => 'System Current', 'pattern' => "", 'type' => 'number'),
-array('id' => '', 'label' => 'System Voltage', 'pattern' => "", 'type' => 'number'),
-array('id' => '', 'label' => 'System Power', 'pattern' => "", 'type' => 'number'),
-array('id' => '', 'label' => 'Panel 1 Voltage', 'pattern' => "", 'type' => 'number'),
-array('id' => '', 'label' => 'Panel 2 Voltage', 'pattern' => "", 'type' => 'number')
+array('id' => '', 'label' => 'System Current (A)', 'pattern' => "", 'type' => 'number'),
+array('id' => '', 'label' => 'System Voltage (V)', 'pattern' => "", 'type' => 'number'),
+array('id' => '', 'label' => 'System Power (W)', 'pattern' => "", 'type' => 'number'),
+array('id' => '', 'label' => 'Panel 1 (V)', 'pattern' => "", 'type' => 'number'),
+array('id' => '', 'label' => 'Panel 2 (V)', 'pattern' => "", 'type' => 'number')
 );
 
 $rows = array();

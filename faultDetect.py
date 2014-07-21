@@ -1,15 +1,21 @@
 #!/usr/bin/python
 
-
+import MySQLdb
 import smtplib
 import urllib2
 import datetime
 import xml.etree.cElementTree as ET
 
-
-#db = MySQLdb.connect("localhost", "root", "root", "data1")
-#cursor = db.cursor()
-#cursor.execute("SELECT * from data1 WHERE DAY(date) = (DAY(NOW())-2) and MONTH(date) = MONTH(NOW())")
+db = MySQLdb.connect("localhost", "root", "root", "mysql")
+cursor = db.cursor()
+try:
+	cursor.execute("SELECT * FROM data1 WHERE (DAY(date) = DAY(NOW()) AND (MONTH(date)) = MONTH(NOW()))")
+	results = cursor.fetchall()
+	for row in results:
+		print row
+except:
+	print "Error: unable to connect to db"
+db.close()
 
 message = 	"""From: From Person <from@fromdomain.com>
 			To: To Person <to@todomain.com>
@@ -34,6 +40,7 @@ msg = "\r\n".join([
   ])
 username = 'gkyrtsakas@gmail.com'
 password = 'uriuxezdztdqxozp'
+"""
 try:
 	server = smtplib.SMTP('smtp.gmail.com', 587)
 	server.ehlo()
@@ -44,6 +51,7 @@ try:
 	print "mail sent"
 except:
 	print "failed to send mail"
+"""
 
 #http://www.earthtools.org/sun/<latitude>/<longitude>/<day>/<month>/<timezone>/<dst>
 
