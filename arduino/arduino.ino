@@ -64,7 +64,7 @@ void loop(){
     double vstot = analogRead(vsens2)*11.0*5.0/1023.0;
     double vs2 = vstot - vs1;
 
-    double current = (csv - 2.5)/0.185;
+    double current = csv*90.00/3.30;
     
     Serial.print("VS1: ");
     Serial.println(vs1);
@@ -110,7 +110,7 @@ boolean sendHer(double v1, double v2, double v3, double c){
   client.print(v2);
   client.print("&&v3=");
   client.print(v3);
-  client.print("&&c=");
+  client.print("&&c1=");
   client.print(c);
   client.println(" HTTP/1.0\r\n");
   client.println("Host:192.241.246.131\r\n");

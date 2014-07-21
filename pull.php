@@ -10,10 +10,10 @@ $date = date('Y-m-d H:i:s');
 $v1 = $_GET['v1'];
 $v2 = $_GET['v2'];
 $v3 = $_GET['v3'];
-$c = $_GET['c'];
+$c1 = $_GET['c1'];
 
 $res = mysqli_query($con, "INSERT INTO data1 (date,voltage,current,voltage2,voltage3) 
-VALUES ('$date','$v1','$c','$v2','$v3')") or die('Error inserting into db');
+VALUES ('$date','$v1','$c1','$v2','$v3')") or die('Error inserting into db');
 
 mysql_close($con);
 
