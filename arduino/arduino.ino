@@ -4,7 +4,7 @@
 
 boolean trigger;
 
-char ssid[] = "wicip";
+char ssid[] = "SolarCapstone";
 char pass[] = "wicipwifi";
 
 int del;
@@ -27,6 +27,7 @@ void setup(){
   pinMode(A15, INPUT);
   del = 0;
   trigger = true;
+  cli();
   TCCR1A = 0; // set TCCR1A register to 00000000
   TCCR1B = 0; // set TCCR1B register to 00000000
   OCR1A = 15624; // set compare match register; should be 1 sec delay
@@ -35,7 +36,7 @@ void setup(){
   TIMSK1 |= (1 << OCIE1A); // enable timer compare interrupt:
   sei();
   
-  status = WiFi.begin(ssid,pass);
+  status = WiFi.begin(ssid);
   if (status != WL_CONNECTED) {
     Serial.println("Attempting to connect to wifi...");
     while(true);
@@ -64,19 +65,19 @@ void loop(){
     double vstot = analogRead(vsens2)*11.0*5.0/1023.0;
     double vs2 = vstot - vs1;
 
-    double current = csv*90.00/3.30;
+    double current = csv*2.00*90.00/3.30;
     
     Serial.print("VS1: ");
     Serial.println(vs1);
     Serial.print("VS2: ");
     Serial.println(vs2);
-    Serial.print("VS3: ");
+    Serial.print("VSTotal: ");
     Serial.println(vstot);
     Serial.print("CS: ");
     Serial.println(current);
     
     for (i=0;i<10;i++) {
-     if (sendHer(vs1, vs2, vstot, current)) {
+     if (sendData(vs1, vs2, vstot, current)) {
       break;
      }
     } 
@@ -85,7 +86,7 @@ void loop(){
   
 }
 
-boolean sendHer(double v1, double v2, double v3, double c){
+boolean sendData(double v1, double v2, double v3, double c){
   boolean con = false;
   int i = 0;
 
