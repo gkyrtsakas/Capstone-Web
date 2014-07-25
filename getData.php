@@ -6,7 +6,7 @@ if (mysqli_connect_errno())
 	echo "Failed to connect to database: ".mysqli_connect_errno();
 }
 
-$result = mysqli_query($con, "SELECT * FROM data1 WHERE date >= now() - INTERVAL 1 DAY;");
+$result = mysqli_query($con, "SELECT * FROM (SELECT * FROM data1 ORDER BY date DESC LIMIT 20) sub ORDER BY date ASC;");
 if (!$result) { // add this check.
     die('Invalid query: ' . mysql_error());
 }
@@ -28,10 +28,10 @@ while ($row = $result->fetch_assoc())
 	$temp = array();
 	$temp[] = array('v' => (string)$row['date'], 'f' => NULL);
 	$temp[] = array('v' => (double)$row['current'], 'f' => NULL);
-	$temp[] = array('v' => (double)$row['voltage'], 'f' => NULL);
-	$temp[] = array('v' => (double)$row['current'] * (double)$row['voltage'], 'f' => NULL);
-	$temp[] = array('v' => (double)$row['voltage2'], 'f' => NULL);
 	$temp[] = array('v' => (double)$row['voltage3'], 'f' => NULL);
+	$temp[] = array('v' => (double)$row['current'] * (double)$row['voltage'], 'f' => NULL);
+	$temp[] = array('v' => (double)$row['voltage'], 'f' => NULL);
+	$temp[] = array('v' => (double)$row['voltage2'], 'f' => NULL);
 	$rows[] = array('c' => $temp);
 }
 $table['rows'] = $rows;

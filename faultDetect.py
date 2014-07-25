@@ -16,7 +16,7 @@ def sendEmail():
 	  "To: gkyrtsakas@gmail.com",
 	  "Subject: Just a message",
 	  "",
-	  "Why, oh why",
+	  "Daily Solar Report",
 	  faultString
 	  ])
 	username = 'gkyrtsakas@gmail.com'

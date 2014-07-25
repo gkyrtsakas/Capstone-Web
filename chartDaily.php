@@ -21,9 +21,16 @@
       // Create our data table out of JSON data loaded from server.
       var data = new google.visualization.DataTable(jsonData);
 
+      var options = {
+        width: 1400,
+        height: 500,
+        hAxis: {title: "Date and Time"},
+        vAxis: {minValue: 0.0}
+      }
+
       // Instantiate and draw our chart, passing in some options.
       var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-      chart.draw(data, {width: 1600, height: 600});
+      chart.draw(data, options);
 
     }
 

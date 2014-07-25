@@ -4,15 +4,15 @@
 
 boolean trigger;
 
-char ssid[] = "SolarCapstone";
+char ssid[] = "wicip";
 char pass[] = "wicipwifi";
 
 int del;
 int status = WL_IDLE_STATUS;
 int led = 13;
-int csens_volt = A15;
-int vsens2 = A14;
-int vsens1 = A13;
+int csens_volt = A5;
+int vsens2 = A3;
+int vsens1 = A1;
 
 uint8_t serverip[4] = {192,241,246,131};
 uint8_t servport = 80;
@@ -22,9 +22,9 @@ WiFiClient client;
 void setup(){
   Serial.begin(9600);
   pinMode(led, OUTPUT);
-  pinMode(A13, INPUT);
-  pinMode(A14, INPUT);
-  pinMode(A15, INPUT);
+  pinMode(A3, INPUT);
+  pinMode(A1, INPUT);
+  pinMode(A5, INPUT);
   del = 0;
   trigger = true;
   cli();
@@ -36,7 +36,7 @@ void setup(){
   TIMSK1 |= (1 << OCIE1A); // enable timer compare interrupt:
   sei();
   
-  status = WiFi.begin(ssid);
+  status = WiFi.begin(ssid,pass);
   if (status != WL_CONNECTED) {
     Serial.println("Attempting to connect to wifi...");
     while(true);
@@ -54,7 +54,7 @@ ISR (TIMER1_COMPA_vect){
 
 void loop(){
   int i;
-  if (del >= 10) {
+  if (del >= 900) {
     digitalWrite(led, !digitalRead(led));
     delay(2);
     del = 0;
@@ -65,7 +65,7 @@ void loop(){
     double vstot = analogRead(vsens2)*11.0*5.0/1023.0;
     double vs2 = vstot - vs1;
 
-    double current = csv*2.00*90.00/3.30;
+    double current = csv*89.40/3.30;
     
     Serial.print("VS1: ");
     Serial.println(vs1);
